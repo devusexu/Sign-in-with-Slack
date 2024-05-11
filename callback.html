@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Processing ...</title>
 </head>
+
 <body>
-   <script> 
+    <script>
         document.addEventListener("DOMContentLoaded", getAccessToken);
 
         async function getAccessToken() {
             // get "code" from the url
             const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code'); 
+            const code = urlParams.get('code');
             console.log(code);
             // send request to server to exchange for access token
-            const clientCallbackURL = 'https://b90a-36-239-32-64.ngrok-free.app/callback'; 
-            const accessToken = await fetch(`${clientCallbackURL}?code=${code}`);
+            const clientCallbackURL = 'https://b90a-36-239-32-64.ngrok-free.app/callback';
+            const response = await fetch(`${clientCallbackURL}?code=${code}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
+            const accessToken = await response.json();
             console.log(accessToken);
         } 
-   </script> 
+    </script>
 </body>
+
 </html>
