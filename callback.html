@@ -22,7 +22,8 @@
                 headers: {
                     'Content-Type': 'application/json',
                     'ngrok-skip-browser-warning': 'true'
-                }
+                },
+                credentials: 'include'
             });
             const accessToken = await response.json();
             console.log(accessToken);
